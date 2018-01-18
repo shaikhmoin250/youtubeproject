@@ -6,8 +6,17 @@ import { AppRoutingModule} from './app.routing.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import {HomeComponent} from './components/home/home.component';
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RegisterComponent } from './components/register/register.component';
+import { AuthService } from './services/auth.service';
+import { LoginComponent } from './components/login/login.component';
+import { ProfileComponent } from './components/profile/profile.component';
+ import { AuthGuard } from './guards/auth.guard';
+import { NotAuthGuard } from './guards/notAuth.guard';
+
+//import { FlashMessagesModule } from 'angular2-flash-messages';
+
+
 
 @NgModule({
   declarations: [
@@ -15,15 +24,19 @@ import { RegisterComponent } from './components/register/register.component';
     NavbarComponent,
     HomeComponent,
     DashboardComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoginComponent,
+    ProfileComponent
+    
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     HttpModule,
     AppRoutingModule
+  //  FlashMessagesModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [AuthService, AuthGuard, NotAuthGuard],
+ bootstrap: [AppComponent]
 })
 export class AppModule { }
